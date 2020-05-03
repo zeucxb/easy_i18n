@@ -1,41 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_i18n/easy_i18n.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  EasyI18nDelegate easyI18nDelegate;
+
+  @override
+  void initState() {
+    easyI18nDelegate = EasyI18nDelegate(
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('pt'),
+        Locale('es'),
+      ],
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: [
-        I18nDelegate(locales: ['en', 'pt', 'es']),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        DefaultCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('pt', ''),
-        const Locale('es', ''),
-      ],
-      localeResolutionCallback:
-          (Locale locale, Iterable<Locale> supportedLocales) {
-        if (locale == null) return supportedLocales.first;
-
-        for (Locale supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode ||
-              supportedLocale.countryCode == locale.countryCode) {
-            return supportedLocale;
-          }
-        }
-
-        return supportedLocales.first;
-      },
+      localizationsDelegates: easyI18nDelegate.localizationsDelegates,
+      supportedLocales: easyI18nDelegate.supportedLocales,
+      localeResolutionCallback: easyI18nDelegate.localeResolutionCallback,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -64,8 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          I18n.of(context).populate(
-            I18n.of(context).trans('title'),
+          EasyI18n.of(context).populate(
+            EasyI18n.of(context).trans('title'),
             {'appName': 'i18n'},
           ),
         ),
@@ -75,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              I18n.of(context).trans('message'),
+              EasyI18n.of(context).trans('message'),
             ),
             Text(
               '$_counter',
@@ -86,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: I18n.of(context).trans('increment'),
+        tooltip: EasyI18n.of(context).trans('increment'),
         child: Icon(Icons.add),
       ),
     );

@@ -3,16 +3,18 @@ library easy_i18n;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+export 'easy_i18n_delegate.dart';
 
-class I18n {
-  I18n(this.locale);
+class EasyI18n {
+  EasyI18n(this.locale);
 
   final Locale locale;
 
-  static I18n of(BuildContext context) {
-    return Localizations.of<I18n>(context, I18n);
+  static EasyI18n of(BuildContext context) {
+    return Localizations.of<EasyI18n>(context, EasyI18n);
   }
 
   Map<String, dynamic> _sentences;
@@ -53,24 +55,4 @@ class I18n {
 
     return sentence;
   }
-}
-
-class I18nDelegate extends LocalizationsDelegate<I18n> {
-  List<String> locales = ['en', 'pt'];
-
-  I18nDelegate({this.locales}) : assert(locales != null && locales.isNotEmpty);
-
-  @override
-  bool isSupported(Locale locale) => locales.contains(locale.languageCode);
-
-  @override
-  Future<I18n> load(Locale locale) async {
-    I18n localizations = new I18n(locale);
-    await localizations.load();
-
-    return localizations;
-  }
-
-  @override
-  bool shouldReload(I18nDelegate old) => false;
 }

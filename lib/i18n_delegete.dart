@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class I18nDelegate extends LocalizationsDelegate<EasyI18n> {
   List<Locale> locales;
 
-  I18nDelegate({this.locales}) : assert(locales != null && locales.isNotEmpty);
+  I18nDelegate({required this.locales}) : assert(locales.isNotEmpty);
 
   @override
   bool isSupported(Locale locale) =>

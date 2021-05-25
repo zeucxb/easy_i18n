@@ -11,15 +11,14 @@ export 'easy_i18n_delegate.dart';
 class EasyI18n {
   EasyI18n(this.locale);
 
-  final Locale locale;
-
-  static EasyI18n of(BuildContext context) {
+  static EasyI18n? of(BuildContext context) {
     return Localizations.of<EasyI18n>(context, EasyI18n);
   }
 
-  Map<String, dynamic> _sentences;
+  final Locale locale;
+  late Map<String, dynamic> _sentences;
 
-  Future<bool> load([Map<String, dynamic> sentences]) async {
+  Future<bool> load([Map<String, dynamic>? sentences]) async {
     if (sentences != null) {
       _sentences = sentences;
       return true;
@@ -36,7 +35,7 @@ class EasyI18n {
     }
   }
 
-  String trans(String key, [List<String> subKeys]) {
+  String trans(String key, [List<String>? subKeys]) {
     var item = this._sentences[key] ?? '';
 
     if (item is Map && (subKeys != null && subKeys.isNotEmpty)) {

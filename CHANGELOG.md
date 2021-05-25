@@ -1,3 +1,7 @@
+## [2.1.0]
+
+* Add null safety support
+
 ## [2.0.0]
 
 * Change I18n to EasyI18n

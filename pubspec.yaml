@@ -1,10 +1,10 @@
 name: easy_i18n
 description: A simple way to make your apps multi language and international
-version: 2.0.0
+version: 2.1.0
 homepage: https://github.com/zeucxb/easy_i18n
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:

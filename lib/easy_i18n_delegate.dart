@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class EasyI18nDelegate {
-  List<LocalizationsDelegate> localizationsDelegates;
-  List<Locale> supportedLocales;
+  final List<Locale> supportedLocales;
+  late List<LocalizationsDelegate> localizationsDelegates;
 
-  EasyI18nDelegate({this.supportedLocales})
-      : assert(supportedLocales != null && supportedLocales.isNotEmpty) {
+  EasyI18nDelegate({required this.supportedLocales})
+      : assert(supportedLocales.isNotEmpty) {
     localizationsDelegates = [
       I18nDelegate(locales: supportedLocales),
       GlobalMaterialLocalizations.delegate,
@@ -20,8 +20,6 @@ class EasyI18nDelegate {
 
   final Locale Function(Locale, Iterable<Locale>) localeResolutionCallback =
       (Locale locale, Iterable<Locale> supportedLocales) {
-    if (locale == null) return supportedLocales.first;
-
     for (Locale supportedLocale in supportedLocales) {
       if (supportedLocale == locale) {
         return supportedLocale;

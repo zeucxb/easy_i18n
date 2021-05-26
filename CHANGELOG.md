@@ -1,3 +1,7 @@
+## [2.2.0]
+
+* Fix localeResolutionCallback and of method
+
 ## [2.1.0]
 
 * Add null safety support

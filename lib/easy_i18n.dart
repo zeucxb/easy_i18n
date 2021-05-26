@@ -11,8 +11,8 @@ export 'easy_i18n_delegate.dart';
 class EasyI18n {
   EasyI18n(this.locale);
 
-  static EasyI18n? of(BuildContext context) {
-    return Localizations.of<EasyI18n>(context, EasyI18n);
+  static EasyI18n of(BuildContext context) {
+    return Localizations.of<EasyI18n>(context, EasyI18n)!;
   }
 
   final Locale locale;

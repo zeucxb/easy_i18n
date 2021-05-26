@@ -18,8 +18,8 @@ class EasyI18nDelegate {
     ];
   }
 
-  final Locale Function(Locale, Iterable<Locale>) localeResolutionCallback =
-      (Locale locale, Iterable<Locale> supportedLocales) {
+  final Locale? Function(Locale?, Iterable<Locale>) localeResolutionCallback =
+      (Locale? locale, Iterable<Locale> supportedLocales) {
     for (Locale supportedLocale in supportedLocales) {
       if (supportedLocale == locale) {
         return supportedLocale;
@@ -27,7 +27,7 @@ class EasyI18nDelegate {
     }
 
     for (Locale supportedLocale in supportedLocales) {
-      if (supportedLocale.languageCode == locale.languageCode) {
+      if (supportedLocale.languageCode == locale?.languageCode) {
         return supportedLocale;
       }
     }
